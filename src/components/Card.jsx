@@ -19,7 +19,6 @@ export default class Card extends Component {
       <>
         <div>
           <h1 data-testid="name-card">
-            Carta
             { cardName }
           </h1>
         </div>
@@ -32,39 +31,31 @@ export default class Card extends Component {
         </div>
         <div>
           <p data-testid="description-card">
-            Descrição
             { cardDescription }
           </p>
         </div>
         <div>
           <p data-testid="attr1-card">
-            Skill 1
             { cardAttr1 }
           </p>
         </div>
         <div>
           <p data-testid="attr2-card">
-            Skill 2
             { cardAttr2 }
           </p>
         </div>
         <div>
           <p data-testid="attr3-card">
-            Skill 3
             { cardAttr3 }
           </p>
         </div>
         <div>
           <p data-testid="rare-card">
-            Raridade
             { cardRare }
           </p>
         </div>
         <div>
-          <p>
-            Essa carta é
-          </p>
-          { cardTrunfo ? <TrunfoText /> : <p>de outro tipo...</p>}
+          { cardTrunfo ? <TrunfoText /> : <p>Carta de outro tipo...</p>}
         </div>
       </>
     );
