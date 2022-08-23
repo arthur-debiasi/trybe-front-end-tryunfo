@@ -20,11 +20,44 @@ class App extends React.Component {
     // const value = type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
+    }, () => {
+      const {
+        cardName,
+        cardDescription,
+        cardImage,
+        cardAttr1,
+        cardAttr2,
+        cardAttr3,
+      } = this.state;
+      const maxAttributesValid = 210;
+      const maxAttribute = 90;
+      const minAttribute = 0;
+      const AttributesSum = +cardAttr1 + +cardAttr2 + +cardAttr3;
+
+      if (cardName
+        && cardDescription
+        && cardImage
+        && cardAttr1 <= maxAttribute
+        && cardAttr2 <= maxAttribute
+        && cardAttr3 <= maxAttribute
+        && cardAttr1 >= minAttribute
+        && cardAttr2 >= minAttribute
+        && cardAttr3 >= minAttribute
+        && (AttributesSum <= maxAttributesValid)
+      ) {
+        this.setState({
+          isSaveButtonDisabled: false,
+        });
+      } else {
+        this.setState({
+          isSaveButtonDisabled: true,
+        });
+      }
     });
   };
 
-  onSaveButtonClick = (event) => {
-    console.log(event.target);
+  onSaveButtonClick = ({ target }) => {
+    console.log(target);
   };
 
   render() {
