@@ -129,10 +129,19 @@ export default class Form extends Component {
         <div>
           <button
             data-testid="save-button"
-            type="submit"
+            type="reset"
             name="saveButton"
             disabled={ isSaveButtonDisabled }
-            onClick={ onSaveButtonClick }
+            onClick={ () => onSaveButtonClick({
+              cardName,
+              cardDescription,
+              cardAttr1,
+              cardAttr2,
+              cardAttr3,
+              cardImage,
+              cardRare,
+              cardTrunfo,
+            }) }
           >
             Salvar
           </button>
