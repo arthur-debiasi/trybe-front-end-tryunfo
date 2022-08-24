@@ -78,6 +78,14 @@ class App extends React.Component {
     });
   };
 
+  deletecard = (cardInfo) => {
+    this.setState(((prevState) => ({
+      hasTrunfo: !cardInfo.cardTrunfo,
+      deckCards: [...prevState.deckCards
+        .filter((e) => e !== cardInfo)],
+    })));
+  };
+
   render() {
     const {
       cardName,
@@ -120,17 +128,28 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        { deckCards.map((e, i) => (<Card
-          cardName={ e.cardName }
-          cardDescription={ e.cardDescription }
-          cardAttr1={ e.cardAttr1 }
-          cardAttr2={ e.cardAttr2 }
-          cardAttr3={ e.cardAttr3 }
-          cardImage={ e.cardImage }
-          cardRare={ e.cardRare }
-          cardTrunfo={ e.cardTrunfo }
-          key={ `${i + 1}-${e.cardAttr1}-${i}` }
-        />)) }
+        { deckCards.map((e, i) => (
+          <>
+            <Card
+              cardName={ e.cardName }
+              cardDescription={ e.cardDescription }
+              cardAttr1={ e.cardAttr1 }
+              cardAttr2={ e.cardAttr2 }
+              cardAttr3={ e.cardAttr3 }
+              cardImage={ e.cardImage }
+              cardRare={ e.cardRare }
+              cardTrunfo={ e.cardTrunfo }
+              key={ `${i + 1}-${e.cardAttr1}-${i}` }
+            />
+            <button
+              data-testid="delete-button"
+              type="button"
+              key={ `${i + 2}-${e.cardAttr1}-${i + 2}` }
+              onClick={ () => this.deletecard(e) }
+            >
+              Excluir
+            </button>
+          </>)) }
       </>
     );
   }
