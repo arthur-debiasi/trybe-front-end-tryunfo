@@ -12,6 +12,7 @@ class App extends React.Component {
     cardImage: '',
     cardRare: '',
     cardTrunfo: false,
+    hasTrunfo: false,
     isSaveButtonDisabled: true,
     deckCards: [],
   };
@@ -71,6 +72,7 @@ class App extends React.Component {
         cardImage: '',
         cardRare: '',
         cardTrunfo: false,
+        hasTrunfo: cardInfo.cardTrunfo,
         isSaveButtonDisabled: true,
       });
     });
@@ -86,6 +88,7 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      hasTrunfo,
       isSaveButtonDisabled,
       deckCards,
     } = this.state;
@@ -102,6 +105,7 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
+          hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.onSaveButtonClick }
