@@ -63,6 +63,8 @@ class App extends React.Component {
       deckCards: [...prevState.deckCards, cardInfo],
       // previewOn: true,
     }), () => {
+      const { deckCards } = this.state;
+      const hasIt = deckCards.some((c) => c.cardTrunfo);
       this.setState({
         cardName: '',
         cardDescription: '',
@@ -72,7 +74,8 @@ class App extends React.Component {
         cardImage: '',
         cardRare: '',
         cardTrunfo: false,
-        hasTrunfo: cardInfo.cardTrunfo,
+        // hasTrunfo: cardInfo.cardTrunfo,
+        hasTrunfo: hasIt,
         isSaveButtonDisabled: true,
       });
     });
