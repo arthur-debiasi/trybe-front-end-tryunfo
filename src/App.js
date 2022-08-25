@@ -166,7 +166,7 @@ class App extends React.Component {
           <div className="deck-container">
             { deckCards
               .filter((e) => e.cardName.match(nameFilter))
-              .filter((e) => (rareFilter === 'todas' ? e : e.cardRare === rareFilter))
+              // .filter((e) => (rareFilter === 'todas' ? e : e.cardRare === rareFilter))
               .map((e, i) => (
                 <>
                   <Card
