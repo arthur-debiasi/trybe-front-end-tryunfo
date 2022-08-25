@@ -15,6 +15,7 @@ class App extends React.Component {
     hasTrunfo: false,
     nameFilter: '',
     rareFilter: 'todas',
+    trunfoFilter: false,
     isSaveButtonDisabled: true,
     deckCards: [],
   };
@@ -104,6 +105,7 @@ class App extends React.Component {
       deckCards,
       nameFilter,
       rareFilter,
+      trunfoFilter,
     } = this.state;
 
     return (
@@ -147,6 +149,7 @@ class App extends React.Component {
               data-testid="name-filter"
               name="nameFilter"
               value={ nameFilter }
+              disabled={ trunfoFilter }
               onChange={ this.onInputChange }
             />
             <select
@@ -154,6 +157,7 @@ class App extends React.Component {
               id="rare-filter"
               name="rareFilter"
               value={ rareFilter }
+              disabled={ trunfoFilter }
               onChange={ this.onInputChange }
             >
               <option value="todas">Todas</option>
@@ -161,14 +165,25 @@ class App extends React.Component {
               <option value="raro">Raro</option>
               <option value="muito raro">Muito raro</option>
             </select>
+            <input
+              type="checkbox"
+              data-testid="trunfo-filter"
+              name="trunfoFilter"
+              id="trunfo-filter"
+              checked={ trunfoFilter === true }
+              onChange={ this.onInputChange }
+            />
           </div>
           <div className="deck-container">
             { deckCards
               .filter((e) => {
+                if (trunfoFilter === true) {
+                  return e.cardTrunfo === true;
+                }
                 if (rareFilter === 'todas') {
                   return e.cardName.match(nameFilter);
                 }
-                return e.cardName.match(nameFilter) && e.cardRare === rareFilter; // O aluno victor mendes da turma 24 tribo B me ajudou a refatorar meu filtro de raridade e a resolver todos os bugs :rocket:
+                return e.cardName.match(nameFilter) && e.cardRare === rareFilter; // O aluno Victor Mendes da turma 24 tribo B me ajudou a refatorar meu filtro de raridade e a resolver todos os bugs :rocket:
               })
               .map((e, i) => (
                 <>
