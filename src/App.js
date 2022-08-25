@@ -10,11 +10,11 @@ class App extends React.Component {
     cardAttr2: 0,
     cardAttr3: 0,
     cardImage: '',
-    cardRare: '',
+    cardRare: 'normal',
     cardTrunfo: false,
     hasTrunfo: false,
     nameFilter: '',
-    rareFilter: '',
+    rareFilter: 'todas',
     isSaveButtonDisabled: true,
     deckCards: [],
   };
@@ -63,7 +63,6 @@ class App extends React.Component {
   onSaveButtonClick = (cardInfo) => {
     this.setState((prevState) => ({
       deckCards: [...prevState.deckCards, cardInfo],
-      // previewOn: true,
     }), () => {
       const { deckCards } = this.state;
       const hasIt = deckCards.some((c) => c.cardTrunfo);
@@ -74,7 +73,7 @@ class App extends React.Component {
         cardAttr2: 0,
         cardAttr3: 0,
         cardImage: '',
-        cardRare: '',
+        cardRare: 'normal',
         cardTrunfo: false,
         hasTrunfo: hasIt,
         isSaveButtonDisabled: true,
@@ -165,8 +164,12 @@ class App extends React.Component {
           </div>
           <div className="deck-container">
             { deckCards
-              .filter((e) => e.cardName.match(nameFilter))
-              // .filter((e) => (rareFilter === 'todas' ? e : e.cardRare === rareFilter))
+              .filter((e) => {
+                if (rareFilter === 'todas') {
+                  return e.cardName.match(nameFilter);
+                }
+                return e.cardName.match(nameFilter) && e.cardRare === rareFilter; // O aluno victor mendes da turma 24 tribo B me ajudou a refatorar meu filtro de raridade e a resolver todos os bugs :rocket:
+              })
               .map((e, i) => (
                 <>
                   <Card
