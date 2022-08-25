@@ -13,13 +13,14 @@ class App extends React.Component {
     cardRare: '',
     cardTrunfo: false,
     hasTrunfo: false,
+    nameFilter: '',
     isSaveButtonDisabled: true,
     deckCards: [],
   };
 
   onInputChange = ({ target }) => {
-    const { name, value /* {type} */ } = target;
-    // const value = type === 'checkbox' ? target.checked : target.value;
+    const { name } = target;
+    const value = target.checked ? target.checked : target.value;
     this.setState({
       [name]: value,
     }, () => {
@@ -74,7 +75,6 @@ class App extends React.Component {
         cardImage: '',
         cardRare: '',
         cardTrunfo: false,
-        // hasTrunfo: cardInfo.cardTrunfo,
         hasTrunfo: hasIt,
         isSaveButtonDisabled: true,
       });
@@ -102,6 +102,7 @@ class App extends React.Component {
       hasTrunfo,
       isSaveButtonDisabled,
       deckCards,
+      nameFilter,
     } = this.state;
 
     return (
@@ -121,38 +122,49 @@ class App extends React.Component {
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.onSaveButtonClick }
         />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
-        { deckCards.map((e, i) => (
-          <>
-            <Card
-              cardName={ e.cardName }
-              cardDescription={ e.cardDescription }
-              cardAttr1={ e.cardAttr1 }
-              cardAttr2={ e.cardAttr2 }
-              cardAttr3={ e.cardAttr3 }
-              cardImage={ e.cardImage }
-              cardRare={ e.cardRare }
-              cardTrunfo={ e.cardTrunfo }
-              key={ `${i + 1}-${e.cardAttr1}-${i}` }
-            />
-            <button
-              data-testid="delete-button"
-              type="button"
-              key={ `${i + 2}-${e.cardAttr1}-${i + 2}` }
-              onClick={ () => this.deletecard(e) }
-            >
-              Excluir
-            </button>
-          </>)) }
+        <div>
+          <input
+            type="text"
+            data-testid="name-filter"
+            name="nameFilter"
+            value={ nameFilter }
+            onChange={ this.onInputChange }
+          />
+          <Card
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+          />
+          { deckCards
+            .filter((e) => e.cardName.match(nameFilter))
+            .map((e, i) => (
+              <>
+                <Card
+                  cardName={ e.cardName }
+                  cardDescription={ e.cardDescription }
+                  cardAttr1={ e.cardAttr1 }
+                  cardAttr2={ e.cardAttr2 }
+                  cardAttr3={ e.cardAttr3 }
+                  cardImage={ e.cardImage }
+                  cardRare={ e.cardRare }
+                  cardTrunfo={ e.cardTrunfo }
+                  key={ `${i + 1}-${e.cardAttr1}-${i}` }
+                />
+                <button
+                  data-testid="delete-button"
+                  type="button"
+                  key={ `${i + 2}-${e.cardAttr1}-${i + 2}` }
+                  onClick={ () => this.deletecard(e) }
+                >
+                  Excluir
+                </button>
+              </>)) }
+        </div>
       </>
     );
   }

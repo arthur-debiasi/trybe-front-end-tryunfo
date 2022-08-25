@@ -55,7 +55,7 @@ export default class Card extends Component {
           </p>
         </div>
         <div>
-          { cardTrunfo ? <TrunfoText /> : <p>Carta de outro tipo...</p>}
+          { cardTrunfo === true && <TrunfoText /> }
         </div>
       </>
     );

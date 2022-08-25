@@ -121,7 +121,7 @@ export default class Form extends Component {
               type="checkbox"
               name="cardTrunfo"
               id="trunfo-input"
-              checked={ cardTrunfo }
+              checked={ cardTrunfo === true }
               onChange={ onInputChange }
             />) : (<p>Você já tem um Super Trunfo em seu baralho</p>)}
           </label>
