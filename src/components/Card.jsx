@@ -16,7 +16,7 @@ export default class Card extends Component {
     } = this.props;
 
     return (
-      <>
+      <div className={ `card-${cardName}` }>
         <div>
           <h1 data-testid="name-card">
             { cardName }
@@ -57,7 +57,7 @@ export default class Card extends Component {
         <div>
           { cardTrunfo === true && <TrunfoText /> }
         </div>
-      </>
+      </div>
     );
   }
 }

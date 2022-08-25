@@ -110,22 +110,39 @@ class App extends React.Component {
     return (
       <>
         <h1>Tryunfo</h1>
-        <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          hasTrunfo={ hasTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-        />
-        <div>
-          <div>
+        <div className="form-card-preview-container">
+          <span className="form-container">
+            <Form
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+              hasTrunfo={ hasTrunfo }
+              isSaveButtonDisabled={ isSaveButtonDisabled }
+              onInputChange={ this.onInputChange }
+              onSaveButtonClick={ this.onSaveButtonClick }
+            />
+          </span>
+          <span className="card-preview">
+            <Card
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+            />
+          </span>
+        </div>
+
+        <div className="deck-container">
+          <div className="filters-container">
             <input
               type="text"
               data-testid="name-filter"
@@ -146,41 +163,33 @@ class App extends React.Component {
               <option value="muito raro">Muito raro</option>
             </select>
           </div>
-          <Card
-            cardName={ cardName }
-            cardDescription={ cardDescription }
-            cardAttr1={ cardAttr1 }
-            cardAttr2={ cardAttr2 }
-            cardAttr3={ cardAttr3 }
-            cardImage={ cardImage }
-            cardRare={ cardRare }
-            cardTrunfo={ cardTrunfo }
-          />
-          { deckCards
-            .filter((e) => e.cardName.match(nameFilter))
-            .filter((e) => (rareFilter === 'todas' ? e : e.cardRare === rareFilter))
-            .map((e, i) => (
-              <>
-                <Card
-                  cardName={ e.cardName }
-                  cardDescription={ e.cardDescription }
-                  cardAttr1={ e.cardAttr1 }
-                  cardAttr2={ e.cardAttr2 }
-                  cardAttr3={ e.cardAttr3 }
-                  cardImage={ e.cardImage }
-                  cardRare={ e.cardRare }
-                  cardTrunfo={ e.cardTrunfo }
-                  key={ `${i + 1}-${e.cardAttr1}-${i}` }
-                />
-                <button
-                  data-testid="delete-button"
-                  type="button"
-                  key={ `${i + 2}-${e.cardAttr1}-${i + 2}` }
-                  onClick={ () => this.deletecard(e) }
-                >
-                  Excluir
-                </button>
-              </>)) }
+          <div className="deck-container">
+            { deckCards
+              .filter((e) => e.cardName.match(nameFilter))
+              .filter((e) => (rareFilter === 'todas' ? e : e.cardRare === rareFilter))
+              .map((e, i) => (
+                <>
+                  <Card
+                    cardName={ e.cardName }
+                    cardDescription={ e.cardDescription }
+                    cardAttr1={ e.cardAttr1 }
+                    cardAttr2={ e.cardAttr2 }
+                    cardAttr3={ e.cardAttr3 }
+                    cardImage={ e.cardImage }
+                    cardRare={ e.cardRare }
+                    cardTrunfo={ e.cardTrunfo }
+                    key={ `${i + 1}-${e.cardAttr1}-${i}` }
+                  />
+                  <button
+                    data-testid="delete-button"
+                    type="button"
+                    key={ `${i + 2}-${e.cardAttr1}-${i + 2}` }
+                    onClick={ () => this.deletecard(e) }
+                  >
+                    Excluir
+                  </button>
+                </>)) }
+          </div>
         </div>
       </>
     );
