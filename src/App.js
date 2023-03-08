@@ -1,6 +1,8 @@
 import React from 'react';
+import uuid from 'react-uuid'; // O Aluno Anderson Nunes T24B me indicou o uuid para lidar com as keys :rocket:
 import Form from './components/Form';
 import Card from './components/Card';
+import './App.css';
 
 class App extends React.Component {
   state = {
@@ -109,7 +111,8 @@ class App extends React.Component {
     } = this.state;
 
     return (
-      <>
+
+      <main>
         <h1>Tryunfo</h1>
         <div className="form-card-preview-container">
           <span className="form-container">
@@ -141,7 +144,6 @@ class App extends React.Component {
             />
           </span>
         </div>
-
         <div className="deck-container">
           <div className="filters-container">
             <input
@@ -174,8 +176,8 @@ class App extends React.Component {
               onChange={ this.onInputChange }
             />
           </div>
-          <div className="deck-container">
-            { deckCards
+          <div className="  ">
+            {deckCards
               .filter((e) => {
                 if (trunfoFilter === true) {
                   return e.cardTrunfo === true;
@@ -185,8 +187,8 @@ class App extends React.Component {
                 }
                 return e.cardName.match(nameFilter) && e.cardRare === rareFilter; // O aluno Victor Mendes da turma 24 tribo B me ajudou a refatorar meu filtro de raridade e a resolver todos os bugs :rocket:
               })
-              .map((e, i) => (
-                <>
+              .map((e) => (
+                <div key={ uuid() }>
                   <Card
                     cardName={ e.cardName }
                     cardDescription={ e.cardDescription }
@@ -196,20 +198,19 @@ class App extends React.Component {
                     cardImage={ e.cardImage }
                     cardRare={ e.cardRare }
                     cardTrunfo={ e.cardTrunfo }
-                    key={ `${i + 1}-${e.cardAttr1}-${i}` }
                   />
                   <button
                     data-testid="delete-button"
                     type="button"
-                    key={ `${i + 2}-${e.cardAttr1}-${i + 2}` }
                     onClick={ () => this.deletecard(e) }
                   >
                     Excluir
                   </button>
-                </>)) }
+                </div>))}
           </div>
         </div>
-      </>
+      </main>
+
     );
   }
 }

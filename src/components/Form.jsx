@@ -131,6 +131,7 @@ export default class Form extends Component {
             data-testid="save-button"
             type="reset"
             name="saveButton"
+            className="btn btn-primary"
             disabled={ isSaveButtonDisabled }
             onClick={ () => onSaveButtonClick({
               cardName,

@@ -16,46 +16,49 @@ export default class Card extends Component {
     } = this.props;
 
     return (
-      <div className={ `card-${cardName}` }>
-        <div>
-          <h1 data-testid="name-card">
-            { cardName }
-          </h1>
-        </div>
+      <div className="card" style={ { width: '20rem' } }>
         <div>
           <img
+            className="card-img-top"
             src={ cardImage }
             alt={ cardName }
             data-testid="image-card"
           />
         </div>
-        <div>
-          <p data-testid="description-card">
+        <div className="card-body">
+          <h5 data-testid="name-card" className="card-title" placeholder="Carta">
+            { cardName }
+          </h5>
+          <p data-testid="description-card" className="card-text">
             { cardDescription }
           </p>
-        </div>
-        <div>
-          <p data-testid="attr1-card">
-            { cardAttr1 }
+          <div>
+            <span>Ataque: </span>
+            <span data-testid="attr1-card" className="card-text">
+              { cardAttr1 }
+            </span>
+          </div>
+          <div>
+            <span>Defesa: </span>
+            <span data-testid="attr2-card" className="card-text">
+              { cardAttr2 }
+            </span>
+          </div>
+          <div>
+            <span>Inteligência: </span>
+            <span data-testid="attr3-card" className="card-text">
+              { cardAttr3 }
+            </span>
+          </div>
+          <div>
+            <span>Tipo: </span>
+            <span data-testid="rare-card" className="card-text">
+              { cardRare }
+            </span>
+          </div>
+          <p className="card-text">
+            { cardTrunfo === true && <TrunfoText /> }
           </p>
-        </div>
-        <div>
-          <p data-testid="attr2-card">
-            { cardAttr2 }
-          </p>
-        </div>
-        <div>
-          <p data-testid="attr3-card">
-            { cardAttr3 }
-          </p>
-        </div>
-        <div>
-          <p data-testid="rare-card">
-            { cardRare }
-          </p>
-        </div>
-        <div>
-          { cardTrunfo === true && <TrunfoText /> }
         </div>
       </div>
     );
