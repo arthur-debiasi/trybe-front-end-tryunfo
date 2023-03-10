@@ -15,8 +15,8 @@ A Top Trumps like game app built with React. A user is able to:
 
 ## 📌 Skills
 
-- Read a component's state and use it to change what we display in the browser;
-- Initialize a component, giving it a predefined state;
+- Read a component's state and use it to change what is displayed in the browser;
+- Initialize a component with a predefined state;
 - Update the state of a component;
 - Capture events using React syntax;
 - Create forms using JSX syntax with tags: input, textarea, select, form, checkbox;
